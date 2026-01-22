@@ -1,48 +1,47 @@
 import { h1 } from "framer-motion/client";
 import React from "react";
 import { Link } from "react-router-dom";
-export default function Login(){
-    return(
-        
-     
-        <div className="bg">
-        <div className="bg1"> 
+export default function Login() {
+  return (
+    <div className="auth-container">
+      <div className="mb-4">
         <h1>LogIn</h1>
-        </div>
-        <div className="bg11">
-            <h3>--------------------OR-----------------------</h3>
+      </div>
+      
+      <div className="auth-card">
+        <center>
+          <h3 className="mb-4">Login your Account</h3>
+          <form>
+            <div className="mb-3 row">
+              <label className="col-sm-3 col-form-label">Email:</label>
+              <div className="col-sm-9">
+                <input type="email"className="form-control" placeholder="enter your email" />
+              </div>
+            </div>
+            
+            <div className="mb-3 row">
+              <label className="col-sm-3 col-form-label">Password:</label>
+              <div className="col-sm-9">
+                <input type="password" className="form-control" placeholder="enter your password" />
+              </div>
+            </div>
+            
+            <div className="mt-4 d-flex justify-content-center">
+               <button className="btn btn-primary w-100" style={{ maxWidth: '200px' }}>
+                  <Link to="/" className="text-white text-decoration-none d-block">Login</Link>
+               </button>
+            </div>
+          </form>
+        </center>
+      </div>
 
+      <div className="mt-4 text-center">
+        <h5 className="my-3">-------------------- OR -----------------------</h5>
+        <div className="mt-3">
+            <p className="mb-1">You have no account? Create a new account</p>
+            <Link to="/Signup" className="text-decoration-none fw-bold fs-5">Signup</Link>
         </div>
-        <div className="bg111">
-            <label htmlFor="">You have no account Create a new account</label><br />
-            <Link to="/Signup" class="text-decoration-none">Signup</Link>
-        </div>
-       
-        <div className="bg2">
-                <center>
-            <h3>Login your Account</h3>
-            <form>
-                <table>
-                <tr>
-                   <td>Email:</td>
-                   <td><input type="email" placeholder="enter your email"/></td>
-                </tr>
-                <br />
-                <tr>
-                    <td>Password:</td>
-                    <td><input type="password" placeholder="enter your password"/></td>
-                </tr>
-            </table>
-            
-            </form>
-            <br /><br />
-            
-            </center>
-            <div className="b1">
-                <button className="button1"><Link to="/" class="text-decoration-none">Login</Link></button>
-                
-            </div>
-             </div>
-            </div>
-    );
+      </div>
+    </div>
+  );
 }
