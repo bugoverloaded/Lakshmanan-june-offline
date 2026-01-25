@@ -1,1 +1,1 @@
-https://fashion-hub0705.netlify.app/
+https://fashionhubnew.netlify.app/
