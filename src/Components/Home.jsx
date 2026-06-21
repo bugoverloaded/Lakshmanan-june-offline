@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import icon from '../assets/img66.png';
 import imgb1 from '../assets/imgb1.jpg';
 import imgh1 from '../assets/imgh1.jpg';
@@ -11,7 +12,14 @@ import imgh7 from '../assets/imgh7.jpg';
 import sam1 from '../assets/sam1.jpg';
 import sam1A from '../assets/sam1A.png';
 
-
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.15, ease: "easeOut" },
+  }),
+};
 
 export default function Home() {
   return (
@@ -44,11 +52,13 @@ export default function Home() {
       <section className="hero-section position-relative text-center">
         <img src={imgb1} alt="Hero" className="w-100 d-block" style={{ height: 'auto', minHeight: '400px', objectFit: 'cover' }} />
         <div className="position-absolute top-50 start-50 translate-middle w-100 p-3" style={{ maxWidth: '800px', zIndex: 1 }}>
-          <div className="p-4 p-md-5" style={{ background: 'rgba(255,255,255,0.4)', borderRadius: '20px', backdropFilter: 'blur(5px)' }}>
+          <motion.div 
+            initial="hidden" animate="visible" variants={fadeUp}
+            className="p-4 p-md-5" style={{ background: 'rgba(255,255,255,0.4)', borderRadius: '20px', backdropFilter: 'blur(5px)' }}>
             <h1 className="display-4 fw-bold mb-3 font-serif">Shop Smarter <br /> Live Better</h1>
             <h4 className="mb-4">Effortlessly blend comfort & style!</h4>
             <button className="btn btn-warning px-4 py-2 rounded-pill text-white fw-bold">Shop Now</button>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -61,52 +71,30 @@ export default function Home() {
 
       <section className="popular-section py-5 bg-light">
         <div className="container">
-          <h2 className="text-center display-4 mb-5" style={{ fontFamily: 'Playfair Display, serif' }}>Most Popular</h2>
+          <motion.h2 
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+            className="text-center display-4 mb-5" style={{ fontFamily: 'Playfair Display, serif' }}>Most Popular</motion.h2>
 
           <div className="row g-4 justify-content-center">
-            <div className="col-12 col-sm-6 col-lg-3">
-              <div className="card h-100 border-0 shadow-sm product-card">
-                <img src={imgh2} className="card-img-top p-3 rounded" alt="Work & Office" />
-                <div className="card-body text-center">
-                  <h5 className="card-title">Work & Office</h5>
-                  <p className="card-text text-muted">Timeless Classic Collection</p>
-                  <h6 className="fw-bold">$129.00</h6>
+            {[ 
+              { img: imgh2, title: "Work & Office", desc: "Timeless Classic Collection", price: "$129.00" },
+              { img: imgh3, title: "Casual", desc: "Bohemian Rhapsody Attire", price: "$145.50" },
+              { img: imgh5a, title: "Party Wear", desc: "Midnight Gala Maxi Dress", price: "$250.00" },
+              { img: imgh1, title: "Casual", desc: "Power Suit Ensemble", price: "$125.00" }
+            ].map((item, i) => (
+              <motion.div 
+                key={i} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+                className="col-12 col-sm-6 col-lg-3">
+                <div className="card h-100 border-0 shadow-sm product-card">
+                  <img src={item.img} className="card-img-top p-3 rounded" alt={item.title} />
+                  <div className="card-body text-center">
+                    <h5 className="card-title">{item.title}</h5>
+                    <p className="card-text text-muted">{item.desc}</p>
+                    <h6 className="fw-bold">{item.price}</h6>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-lg-3">
-              <div className="card h-100 border-0 shadow-sm product-card">
-                <img src={imgh3} className="card-img-top p-3 rounded" alt="Casual" />
-                <div className="card-body text-center">
-                  <h5 className="card-title">Casual</h5>
-                  <p className="card-text text-muted">Bohemian Rhapsody Attire</p>
-                  <h6 className="fw-bold">$145.50</h6>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-lg-3">
-              <div className="card h-100 border-0 shadow-sm product-card">
-                <img src={imgh5a} className="card-img-top p-3 rounded" alt="Party Wear" />
-                <div className="card-body text-center">
-                  <h5 className="card-title">Party Wear</h5>
-                  <p className="card-text text-muted">Midnight Gala Maxi Dress</p>
-                  <h6 className="fw-bold">$250.00</h6>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-sm-6 col-lg-3">
-              <div className="card h-100 border-0 shadow-sm product-card">
-                <img src={imgh1} className="card-img-top p-3 rounded" alt="Casual" />
-                <div className="card-body text-center">
-                  <h5 className="card-title">Casual</h5>
-                  <p className="card-text text-muted">Power Suit Ensemble</p>
-                  <h6 className="fw-bold">$125.00</h6>
-                </div>
-              </div>
-            </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -116,10 +104,14 @@ export default function Home() {
       <section className="collection-section position-relative my-5" style={{ minHeight: '80vh' }}>
         <div className="container-fluid p-0 position-relative h-100">
           <div className="row g-0 align-items-center">
-            <div className="col-lg-7 position-relative">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
+              className="col-lg-7 position-relative">
               <img src={imgh6} alt="" className="w-100 object-fit-cover" style={{ minHeight: '600px' }} />
-            </div>
-            <div className="col-lg-5 p-5 bg-white shadow-lg" style={{ zIndex: 1, marginTop: '-100px', marginLeft: '-50px', maxWidth: '500px' }}>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
+              className="col-lg-5 p-5 bg-white shadow-lg" style={{ zIndex: 1, marginTop: '-100px', marginLeft: '-50px', maxWidth: '500px' }}>
 
               <div className="position-relative mb-4">
                 <img src={imgh7} alt="" className="img-fluid rounded shadow" />
@@ -127,7 +119,7 @@ export default function Home() {
 
               <h3 className="mb-4" style={{ fontFamily: 'serif' }}>Explore our exquisite Bag Collection now!</h3>
               <button className="btn btn-warning rounded-pill text-white px-4 py-2">Shop Now</button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -136,7 +128,9 @@ export default function Home() {
 
       <section className="testimonial-section position-relative text-white d-flex align-items-center justify-content-center" style={{ minHeight: '100vh', background: '#777' }}>
         <img src={sam1} alt="" className="position-absolute w-100 h-100 object-fit-cover" style={{ opacity: 0.5 }} />
-        <div className="container position-relative z-1 text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
+          className="container position-relative z-1 text-center">
           <div className="row justify-content-center align-items-center">
             <div className="col-md-5 mb-4 mb-md-0 position-relative">
               <div className="position-relative d-inline-block">
@@ -151,7 +145,7 @@ export default function Home() {
               <p className="lead fst-italic">"Fashion-Hub is my fashion sanctuary! The curated collection effortlessly blends chic trends with timeless elegance, making every purchase a delightful discovery. The quality of their pieces is unmatched, and I appreciate the brand's commitment to sustainable fashion. What truly sets FemmeWardrobe apart is their customer-centric approach"</p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <footer className="bg-dark text-white text-center py-3">

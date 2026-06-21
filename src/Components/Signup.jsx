@@ -1,38 +1,51 @@
 import React from "react";
-import { div, h1 } from "framer-motion/client";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.15, ease: "easeOut" },
+  }),
+};
 
 export default function Signup() {
   return (
     <div className="auth-container">
-      <div className="mb-3">
-        <h1>Signup</h1>
-      </div>
+      <motion.div 
+        custom={0} initial="hidden" animate="visible" variants={fadeUp}
+        className="mb-3 text-center">
+        <h1 className="fw-bold font-serif">Signup</h1>
+      </motion.div>
 
-      <div className="auth-card">
+      <motion.div 
+        custom={1} initial="hidden" animate="visible" variants={fadeUp}
+        className="auth-card">
         <h2 className="text-center mb-4">Create your new account</h2>
         <form className="d-flex flex-column gap-3">
           <div>
-            <label className="form-label">Your Name</label>
+            <label className="form-label text-start d-block">Your Name</label>
             <input type="text" className="form-control" placeholder="Enter Name" />
           </div>
           
           <div>
-            <label className="form-label">Your E-mail</label>
+            <label className="form-label text-start d-block">Your E-mail</label>
             <input type="email" className="form-control" placeholder="Enter E-mail" />
           </div>
           
           <div>
-            <label className="form-label">Create Password</label>
+            <label className="form-label text-start d-block">Create Password</label>
             <input type="password" className="form-control" placeholder="At least 8 characters" />
           </div>
           
           <div>
-            <label className="form-label">Confirm Password</label>
+            <label className="form-label text-start d-block">Confirm Password</label>
             <input type="password" className="form-control" placeholder="Re-enter Your Password" />
           </div>
 
-          <div className="form-check">
+          <div className="form-check text-start">
             <input type="checkbox" className="form-check-input" id="termsCheck" />
             <label className="form-check-label" htmlFor="termsCheck">
               I agree to all Term & privacy policy and Fees.
@@ -45,12 +58,14 @@ export default function Signup() {
             </button>
           </div>
         </form>
-      </div>
+      </motion.div>
 
-      <div className="mt-4 text-center">
+      <motion.div 
+        custom={2} initial="hidden" animate="visible" variants={fadeUp}
+        className="mt-4 text-center">
         <label className="me-2">Have an Account..?</label>
-        <Link to="/Login" className="text-decoration-none fw-bold">Sign-in</Link>
-      </div>
+        <Link to="/Login" className="text-decoration-none fw-bold fs-5">Sign-in</Link>
+      </motion.div>
     </div>
   );
 }
